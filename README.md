@@ -26,7 +26,7 @@ conda env create -f environment.yml
 This repository depends on a git submodule, [pytorch-prototyping](https://github.com/vsitzmann/pytorch_prototyping). 
 To clone both the main repo and the submodule, use
 ```
-git clone --recurse-submodules git@github.com:vsitzmann/scene-representation-networks.git
+git clone --recurse-submodules https://github.com/vsitzmann/scene-representation-networks.git
 ```
 
 ### High-Level structure
@@ -34,12 +34,23 @@ The code is organized as follows:
 * dataio.py loads training and testing data.
 * data_util.py and util.py contain utility functions.
 * train.py contains the training code.
-* test.py contains the training code.
+* test.py contains the testing code.
 * srns.py contains the core SRNs model.
 * hyperlayers.py contains implementations of different hypernetworks.
 * custom_layers.py contains implementations of the raymarcher and the DeepVoxels U-Net renderer.
 * geometry.py contains utility functions for 3D and projective geometry.
 * util.py contains misc utility functions.
+
+### Pre-Trained models
+There are pre-trained models for the shapenet car and chair datasets available, including tensorboard event files of the
+full training process. 
+
+Please download them [here](https://drive.google.com/open?id=1IdOywOSLuK6WlkO5_h-ykr3ubeY9eDig).
+
+The checkpoint is in the "checkpoints" directory - to load weights from the checkpoint, simply pass the full path to the checkpoint
+to the "--checkpoint_path" command-line argument. 
+
+To inspect the progress of how I trained these models, run tensorboard in the "events" subdirectory. 
 
 ### Data
 Four different datasets appear in the paper:
@@ -48,6 +59,9 @@ Four different datasets appear in the paper:
 * Bazel face dataset.
 
 Please download the datasets [here](https://drive.google.com/drive/folders/1OkYgeRcIcLOFu1ft5mRODWNQaPJ0ps90?usp=sharing).
+
+### Rendering your own datasets
+I have put together a few scripts for the Blender python interface that make it easy to render your own dataset. Please find them [here](https://github.com/vsitzmann/shapenet_renderer/blob/master/shapenet_spherical_renderer.py).
 
 ### Coordinate and camera parameter conventions
 This code uses an "OpenCV" style camera coordinate system, where the Y-axis points downwards (the up-vector points in the negative Y-direction), 
